@@ -1,0 +1,291 @@
+{
+  "nodes": [
+    {
+      "id": "ME21N",
+      "type": "transaction",
+      "module": "MM",
+      "name": "Create Purchase Order",
+      "risk": "Medium",
+      "category": "Core Process"
+    },
+    {
+      "id": "FB60", 
+      "type": "transaction",
+      "module": "FI",
+      "name": "Enter Incoming Invoice",
+      "risk": "High",
+      "category": "Core Process"
+    },
+    {
+      "id": "VA01",
+      "type": "transaction", 
+      "module": "SD",
+      "name": "Create Sales Order",
+      "risk": "Medium",
+      "category": "Core Process"
+    },
+    {
+      "id": "MIGO",
+      "type": "transaction",
+      "module": "MM", 
+      "name": "Goods Movement",
+      "risk": "High",
+      "category": "Core Process"
+    },
+    {
+      "id": "ME28",
+      "type": "transaction",
+      "module": "MM",
+      "name": "Release Purchase Order", 
+      "risk": "Low",
+      "category": "Approval Process"
+    },
+    {
+      "id": "MIRO",
+      "type": "transaction",
+      "module": "MM",
+      "name": "Invoice Receipt",
+      "risk": "Medium", 
+      "category": "Core Process"
+    },
+    {
+      "id": "VF01",
+      "type": "transaction",
+      "module": "SD",
+      "name": "Create Billing Document",
+      "risk": "Medium",
+      "category": "Core Process"
+    },
+    {
+      "id": "VL01N",
+      "type": "transaction",
+      "module": "SD", 
+      "name": "Create Outbound Delivery",
+      "risk": "Low",
+      "category": "Core Process"
+    },
+    {
+      "id": "VENDOR_MASTER",
+      "type": "master_data",
+      "module": "MM",
+      "name": "Vendor Master Data",
+      "risk": "High",
+      "category": "Master Data"
+    },
+    {
+      "id": "MATERIAL_MASTER",
+      "type": "master_data", 
+      "module": "MM",
+      "name": "Material Master Data",
+      "risk": "High",
+      "category": "Master Data"
+    },
+    {
+      "id": "CUSTOMER_MASTER",
+      "type": "master_data",
+      "module": "SD",
+      "name": "Customer Master Data", 
+      "risk": "High",
+      "category": "Master Data"
+    },
+    {
+      "id": "Z_PO_APPROVAL",
+      "type": "custom_program",
+      "module": "MM",
+      "name": "PO Approval Workflow",
+      "risk": "High",
+      "category": "Custom Enhancement"
+    },
+    {
+      "id": "PRICING",
+      "type": "configuration",
+      "module": "SD",
+      "name": "Pricing Configuration",
+      "risk": "Medium",
+      "category": "Configuration"
+    },
+    {
+      "id": "GL_ACCOUNTS",
+      "type": "master_data",
+      "module": "FI", 
+      "name": "General Ledger Accounts",
+      "risk": "High",
+      "category": "Master Data"
+    },
+    {
+      "id": "ATP_CHECK",
+      "type": "configuration",
+      "module": "SD",
+      "name": "Available to Promise Check",
+      "risk": "Medium",
+      "category": "Configuration"
+    }
+  ],
+  "edges": [
+    {
+      "source": "ME21N",
+      "target": "VENDOR_MASTER",
+      "type": "reads",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "ME21N", 
+      "target": "MATERIAL_MASTER",
+      "type": "reads",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "ME21N",
+      "target": "Z_PO_APPROVAL",
+      "type": "calls", 
+      "dependency_type": "conditional",
+      "impact_level": "medium"
+    },
+    {
+      "source": "ME28",
+      "target": "ME21N",
+      "type": "processes",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "MIGO",
+      "target": "ME21N",
+      "type": "references",
+      "dependency_type": "mandatory", 
+      "impact_level": "high"
+    },
+    {
+      "source": "MIGO",
+      "target": "MATERIAL_MASTER",
+      "type": "updates",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "MIRO",
+      "target": "ME21N",
+      "type": "references",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "MIRO",
+      "target": "MIGO", 
+      "type": "validates",
+      "dependency_type": "conditional",
+      "impact_level": "medium"
+    },
+    {
+      "source": "FB60",
+      "target": "VENDOR_MASTER",
+      "type": "reads",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "FB60",
+      "target": "GL_ACCOUNTS",
+      "type": "posts",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "FB60",
+      "target": "MIRO",
+      "type": "references",
+      "dependency_type": "conditional",
+      "impact_level": "medium"
+    },
+    {
+      "source": "VA01",
+      "target": "CUSTOMER_MASTER",
+      "type": "reads",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "VA01",
+      "target": "MATERIAL_MASTER", 
+      "type": "reads",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "VA01",
+      "target": "PRICING",
+      "type": "calculates",
+      "dependency_type": "mandatory",
+      "impact_level": "medium"
+    },
+    {
+      "source": "VA01",
+      "target": "ATP_CHECK",
+      "type": "validates",
+      "dependency_type": "conditional",
+      "impact_level": "medium"
+    },
+    {
+      "source": "VL01N",
+      "target": "VA01",
+      "type": "references",
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "VF01",
+      "target": "VA01",
+      "type": "references", 
+      "dependency_type": "mandatory",
+      "impact_level": "high"
+    },
+    {
+      "source": "VF01",
+      "target": "VL01N",
+      "type": "references",
+      "dependency_type": "conditional",
+      "impact_level": "medium"
+    },
+    {
+      "source": "VF01",
+      "target": "PRICING",
+      "type": "calculates",
+      "dependency_type": "mandatory",
+      "impact_level": "medium"
+    }
+  ],
+  "impact_analysis": {
+    "VENDOR_MASTER": {
+      "affected_transactions": ["ME21N", "FB60", "MIRO"],
+      "impact_level": "Critical",
+      "business_processes": ["Procurement", "Accounts Payable"],
+      "testing_priority": "High"
+    },
+    "MATERIAL_MASTER": {
+      "affected_transactions": ["ME21N", "MIGO", "VA01"], 
+      "impact_level": "Critical",
+      "business_processes": ["Procurement", "Sales", "Inventory"],
+      "testing_priority": "High"
+    },
+    "CUSTOMER_MASTER": {
+      "affected_transactions": ["VA01", "VF01"],
+      "impact_level": "High",
+      "business_processes": ["Sales", "Billing"],
+      "testing_priority": "Medium"
+    },
+    "Z_PO_APPROVAL": {
+      "affected_transactions": ["ME21N", "ME28"],
+      "impact_level": "Medium",
+      "business_processes": ["Procurement Approval"],
+      "testing_priority": "Medium"
+    },
+    "PRICING": {
+      "affected_transactions": ["VA01", "VF01"],
+      "impact_level": "High", 
+      "business_processes": ["Sales", "Billing"],
+      "testing_priority": "High"
+    }
+  }
+} 

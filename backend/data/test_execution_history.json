@@ -1,0 +1,508 @@
+{
+  "executions": [
+    {
+      "execution_id": "exec_001",
+      "test_case_id": "ME21N_001",
+      "test_name": "Purchase Order Creation - Standard Flow",
+      "transaction": "ME21N",
+      "status": "completed",
+      "result": "passed",
+      "start_time": "2025-07-30T17:30:15.123Z",
+      "end_time": "2025-07-30T17:32:18.456Z",
+      "duration_seconds": 123.333,
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Login to SAP system",
+          "status": "passed",
+          "duration_ms": 2340,
+          "screenshot": "login_success.png",
+          "details": "Successful login with user TESTUSER001"
+        },
+        {
+          "step": 2,
+          "description": "Navigate to ME21N transaction",
+          "status": "passed",
+          "duration_ms": 1890,
+          "screenshot": "me21n_screen.png",
+          "details": "Transaction ME21N loaded successfully"
+        },
+        {
+          "step": 3,
+          "description": "Enter vendor V001",
+          "status": "passed",
+          "duration_ms": 1200,
+          "screenshot": "vendor_entry.png",
+          "details": "Vendor V001 validated and accepted"
+        },
+        {
+          "step": 4,
+          "description": "Add material M001 with quantity 100",
+          "status": "passed",
+          "duration_ms": 2100,
+          "screenshot": "material_entry.png",
+          "details": "Material M001 added, price determined: €125.00"
+        },
+        {
+          "step": 5,
+          "description": "Save purchase order",
+          "status": "passed",
+          "duration_ms": 3450,
+          "screenshot": "po_save.png",
+          "details": "Purchase order 4500123456 created successfully"
+        }
+      ],
+      "performance_metrics": {
+        "total_duration": 123.333,
+        "response_time_avg": 2196,
+        "response_time_max": 3450,
+        "response_time_min": 1200,
+        "cpu_usage_avg": 15.2,
+        "memory_usage_mb": 245,
+        "network_latency_ms": 23
+      },
+      "validations": [
+        {
+          "validation": "PO number generated",
+          "expected": "4500xxxxxx format",
+          "actual": "4500123456",
+          "status": "passed"
+        },
+        {
+          "validation": "Vendor validation",
+          "expected": "Active vendor status",
+          "actual": "Active vendor V001",
+          "status": "passed"
+        },
+        {
+          "validation": "Price determination",
+          "expected": "Auto price calculation",
+          "actual": "€125.00 per unit",
+          "status": "passed"
+        }
+      ],
+      "environment": {
+        "system": "SAP ECC 6.0",
+        "client": "100",
+        "server": "SAPDEV01",
+        "response_time": "Good"
+      }
+    },
+    {
+      "execution_id": "exec_002",
+      "test_case_id": "ME21N_002",
+      "test_name": "Purchase Order Creation - Approval Workflow",
+      "transaction": "ME21N",
+      "status": "completed",
+      "result": "failed",
+      "start_time": "2025-07-30T17:35:22.789Z",
+      "end_time": "2025-07-30T17:37:45.123Z",
+      "duration_seconds": 142.334,
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Login to SAP system",
+          "status": "passed",
+          "duration_ms": 2100,
+          "screenshot": "login_success.png",
+          "details": "Successful login with user TESTUSER002"
+        },
+        {
+          "step": 2,
+          "description": "Navigate to ME21N transaction",
+          "status": "passed",
+          "duration_ms": 1650,
+          "screenshot": "me21n_screen.png",
+          "details": "Transaction ME21N loaded successfully"
+        },
+        {
+          "step": 3,
+          "description": "Enter vendor V002",
+          "status": "passed",
+          "duration_ms": 1400,
+          "screenshot": "vendor_entry.png",
+          "details": "Vendor V002 validated and accepted"
+        },
+        {
+          "step": 4,
+          "description": "Add high-value material M002 (€50,000)",
+          "status": "passed",
+          "duration_ms": 2800,
+          "screenshot": "material_entry.png",
+          "details": "Material M002 added, triggers approval workflow"
+        },
+        {
+          "step": 5,
+          "description": "Save purchase order",
+          "status": "failed",
+          "duration_ms": 5200,
+          "screenshot": "approval_error.png",
+          "details": "Error: Approval workflow timeout - Manager MGRUSER001 not available",
+          "error_code": "ME_APPROVAL_TIMEOUT",
+          "error_message": "Purchase order requires approval but approval workflow timed out after 5 seconds"
+        }
+      ],
+      "performance_metrics": {
+        "total_duration": 142.334,
+        "response_time_avg": 2630,
+        "response_time_max": 5200,
+        "response_time_min": 1400,
+        "cpu_usage_avg": 18.7,
+        "memory_usage_mb": 268,
+        "network_latency_ms": 45
+      },
+      "validations": [
+        {
+          "validation": "PO number generated",
+          "expected": "4500xxxxxx format",
+          "actual": "Not generated - approval required",
+          "status": "failed"
+        },
+        {
+          "validation": "Approval workflow triggered",
+          "expected": "Approval request sent",
+          "actual": "Workflow timeout",
+          "status": "failed"
+        }
+      ],
+      "auto_healing": {
+        "analysis": "Approval workflow timeout detected",
+        "root_cause": "Manager MGRUSER001 is not logged in or has insufficient authorization",
+        "recommendations": [
+          {
+            "action": "Retry with alternative approver",
+            "priority": "high",
+            "estimated_fix_time": "2 minutes",
+            "automation_available": true
+          },
+          {
+            "action": "Increase workflow timeout to 30 seconds",
+            "priority": "medium",
+            "estimated_fix_time": "5 minutes",
+            "automation_available": false
+          },
+          {
+            "action": "Use emergency approval process",
+            "priority": "low",
+            "estimated_fix_time": "10 minutes",
+            "automation_available": true
+          }
+        ],
+        "auto_retry_attempted": true,
+        "auto_retry_result": "success",
+        "auto_retry_details": "Automatically retried with approver MGRUSER002, PO 4500123457 created"
+      },
+      "environment": {
+        "system": "SAP ECC 6.0",
+        "client": "100",
+        "server": "SAPDEV01",
+        "response_time": "Degraded"
+      }
+    },
+    {
+      "execution_id": "exec_003",
+      "test_case_id": "MIGO_001",
+      "test_name": "Goods Receipt for PO 4500123456",
+      "transaction": "MIGO",
+      "status": "running",
+      "result": "in_progress",
+      "start_time": "2025-07-30T17:45:30.456Z",
+      "current_step": 3,
+      "total_steps": 6,
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Login to SAP system",
+          "status": "passed",
+          "duration_ms": 2000,
+          "screenshot": "login_success.png",
+          "details": "Successful login with user WHUSER001"
+        },
+        {
+          "step": 2,
+          "description": "Navigate to MIGO transaction",
+          "status": "passed",
+          "duration_ms": 1800,
+          "screenshot": "migo_screen.png",
+          "details": "Transaction MIGO loaded successfully"
+        },
+        {
+          "step": 3,
+          "description": "Enter purchase order 4500123456",
+          "status": "running",
+          "start_time": "2025-07-30T17:45:34.256Z",
+          "details": "Validating purchase order reference..."
+        },
+        {
+          "step": 4,
+          "description": "Enter received quantity",
+          "status": "pending"
+        },
+        {
+          "step": 5,
+          "description": "Post goods receipt",
+          "status": "pending"
+        },
+        {
+          "step": 6,
+          "description": "Verify material document creation",
+          "status": "pending"
+        }
+      ],
+      "performance_metrics": {
+        "elapsed_time": 23.8,
+        "response_time_avg": 1900,
+        "cpu_usage_current": 12.5,
+        "memory_usage_mb": 198
+      },
+      "environment": {
+        "system": "SAP ECC 6.0",
+        "client": "100",
+        "server": "SAPDEV01",
+        "response_time": "Good"
+      }
+    },
+    {
+      "execution_id": "exec_004",
+      "test_case_id": "VA01_001",
+      "test_name": "Sales Order Creation - Standard Customer",
+      "transaction": "VA01",
+      "status": "completed",
+      "result": "passed",
+      "start_time": "2025-07-30T17:20:10.789Z",
+      "end_time": "2025-07-30T17:22:35.234Z",
+      "duration_seconds": 144.445,
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Login to SAP system",
+          "status": "passed",
+          "duration_ms": 2200,
+          "screenshot": "login_success.png",
+          "details": "Successful login with user SALESUSER001"
+        },
+        {
+          "step": 2,
+          "description": "Navigate to VA01 transaction",
+          "status": "passed",
+          "duration_ms": 1750,
+          "screenshot": "va01_screen.png",
+          "details": "Transaction VA01 loaded successfully"
+        },
+        {
+          "step": 3,
+          "description": "Enter customer C001",
+          "status": "passed",
+          "duration_ms": 1500,
+          "screenshot": "customer_entry.png",
+          "details": "Customer C001 validated and accepted"
+        },
+        {
+          "step": 4,
+          "description": "Add product P001 with quantity 50",
+          "status": "passed",
+          "duration_ms": 2400,
+          "screenshot": "product_entry.png",
+          "details": "Product P001 added, ATP check passed"
+        },
+        {
+          "step": 5,
+          "description": "Calculate pricing",
+          "status": "passed",
+          "duration_ms": 1800,
+          "screenshot": "pricing_calc.png",
+          "details": "Pricing calculated: €2,500.00 total"
+        },
+        {
+          "step": 6,
+          "description": "Save sales order",
+          "status": "passed",
+          "duration_ms": 3100,
+          "screenshot": "so_save.png",
+          "details": "Sales order 1000567890 created successfully"
+        }
+      ],
+      "performance_metrics": {
+        "total_duration": 144.445,
+        "response_time_avg": 2125,
+        "response_time_max": 3100,
+        "response_time_min": 1500,
+        "cpu_usage_avg": 16.8,
+        "memory_usage_mb": 234,
+        "network_latency_ms": 19
+      },
+      "validations": [
+        {
+          "validation": "Sales order number generated",
+          "expected": "1000xxxxxx format",
+          "actual": "1000567890",
+          "status": "passed"
+        },
+        {
+          "validation": "ATP (Available to Promise) check",
+          "expected": "Sufficient stock available",
+          "actual": "Stock: 150 units available",
+          "status": "passed"
+        },
+        {
+          "validation": "Pricing calculation",
+          "expected": "Automatic pricing",
+          "actual": "€50.00 per unit = €2,500.00",
+          "status": "passed"
+        }
+      ],
+      "environment": {
+        "system": "SAP ECC 6.0",
+        "client": "100",
+        "server": "SAPDEV01",
+        "response_time": "Good"
+      }
+    },
+    {
+      "execution_id": "exec_005",
+      "test_case_id": "ME21N_003",
+      "test_name": "Purchase Order - Invalid Vendor Error",
+      "transaction": "ME21N",
+      "status": "completed",
+      "result": "failed",
+      "start_time": "2025-07-30T17:40:15.567Z",
+      "end_time": "2025-07-30T17:41:02.890Z",
+      "duration_seconds": 47.323,
+      "execution_steps": [
+        {
+          "step": 1,
+          "description": "Login to SAP system",
+          "status": "passed",
+          "duration_ms": 2100,
+          "screenshot": "login_success.png",
+          "details": "Successful login with user TESTUSER003"
+        },
+        {
+          "step": 2,
+          "description": "Navigate to ME21N transaction",
+          "status": "passed",
+          "duration_ms": 1900,
+          "screenshot": "me21n_screen.png",
+          "details": "Transaction ME21N loaded successfully"
+        },
+        {
+          "step": 3,
+          "description": "Enter invalid vendor V999",
+          "status": "failed",
+          "duration_ms": 3200,
+          "screenshot": "vendor_error.png",
+          "details": "Error: Vendor V999 does not exist or is blocked",
+          "error_code": "ME_VENDOR_INVALID",
+          "error_message": "Vendor V999 is not maintained in the system"
+        }
+      ],
+      "performance_metrics": {
+        "total_duration": 47.323,
+        "response_time_avg": 2400,
+        "response_time_max": 3200,
+        "response_time_min": 1900,
+        "cpu_usage_avg": 14.2,
+        "memory_usage_mb": 201,
+        "network_latency_ms": 28
+      },
+      "validations": [
+        {
+          "validation": "Vendor existence check",
+          "expected": "Valid vendor",
+          "actual": "Vendor V999 not found",
+          "status": "failed"
+        }
+      ],
+      "auto_healing": {
+        "analysis": "Invalid vendor reference detected",
+        "root_cause": "Vendor V999 does not exist in vendor master",
+        "recommendations": [
+          {
+            "action": "Use alternative vendor V001",
+            "priority": "high",
+            "estimated_fix_time": "30 seconds",
+            "automation_available": true
+          },
+          {
+            "action": "Create vendor V999 in master data",
+            "priority": "medium",
+            "estimated_fix_time": "15 minutes",
+            "automation_available": false
+          },
+          {
+            "action": "Check vendor naming convention",
+            "priority": "low",
+            "estimated_fix_time": "5 minutes",
+            "automation_available": true
+          }
+        ],
+        "auto_retry_attempted": true,
+        "auto_retry_result": "success",
+        "auto_retry_details": "Automatically retried with vendor V001, test passed"
+      },
+      "environment": {
+        "system": "SAP ECC 6.0",
+        "client": "100",
+        "server": "SAPDEV01",
+        "response_time": "Good"
+      }
+    }
+  ],
+  "summary_stats": {
+    "total_executions": 5,
+    "passed": 3,
+    "failed": 2,
+    "in_progress": 1,
+    "success_rate": 60.0,
+    "average_duration": 120.167,
+    "auto_healing_success_rate": 100.0,
+    "most_common_failures": [
+      {
+        "error_type": "Approval workflow timeout",
+        "count": 1,
+        "percentage": 50.0
+      },
+      {
+        "error_type": "Invalid vendor reference",
+        "count": 1,
+        "percentage": 50.0
+      }
+    ],
+    "performance_trends": {
+      "avg_response_time_trend": "stable",
+      "error_rate_trend": "improving",
+      "auto_healing_trend": "excellent"
+    }
+  },
+  "execution_templates": {
+    "ME21N": {
+      "typical_duration": "2-3 minutes",
+      "common_steps": 5,
+      "success_rate": 85,
+      "common_errors": ["approval_timeout", "vendor_invalid", "material_not_found"]
+    },
+    "MIGO": {
+      "typical_duration": "1-2 minutes",
+      "common_steps": 6,
+      "success_rate": 92,
+      "common_errors": ["po_not_found", "quantity_mismatch", "storage_location_invalid"]
+    },
+    "VA01": {
+      "typical_duration": "2-3 minutes",
+      "common_steps": 6,
+      "success_rate": 88,
+      "common_errors": ["customer_blocked", "atp_check_failed", "pricing_error"]
+    }
+  },
+  "real_time_monitoring": {
+    "active_executions": 1,
+    "queue_length": 0,
+    "system_health": "good",
+    "resource_usage": {
+      "cpu_percent": 25.4,
+      "memory_percent": 45.2,
+      "disk_io_percent": 12.8
+    },
+    "last_updated": "2025-07-30T17:45:35.123Z"
+  }
+} 

@@ -1,0 +1,281 @@
+{
+  "templates": {
+    "standard_po_creation": {
+      "name": "Standard Purchase Order Creation",
+      "transaction": "ME21N",
+      "description": "Create a standard purchase order for material procurement",
+      "steps": [
+        "Login to SAP system with appropriate user credentials",
+        "Navigate to transaction ME21N",
+        "Enter vendor number in the Vendor field",
+        "Select purchase organization",
+        "Select purchasing group",
+        "Enter company code",
+        "Add line item with material number",
+        "Enter quantity and unit of measure",
+        "Verify net price is populated",
+        "Enter delivery date",
+        "Save the purchase order",
+        "Note the PO number generated"
+      ],
+      "test_data": {
+        "vendor": "V001",
+        "material": "M001",
+        "quantity": "10",
+        "unit": "EA",
+        "plant": "1000",
+        "purchase_org": "1000",
+        "purchase_group": "001"
+      },
+      "validations": [
+        "PO number is generated and displayed",
+        "PO status shows 'Created'",
+        "Net value is calculated correctly",
+        "Delivery date is set as specified",
+        "Material master data is validated",
+        "Vendor master data is validated"
+      ],
+      "expected_result": "Purchase order created successfully with valid PO number",
+      "prerequisites": [
+        "Valid vendor master data exists",
+        "Valid material master data exists",
+        "User has authorization for purchase organization"
+      ]
+    },
+    "approval_workflow": {
+      "name": "Purchase Order Approval Workflow",
+      "transaction": "ME21N",
+      "description": "Test purchase order approval workflow for high-value orders",
+      "steps": [
+        "Create purchase order above approval limit using ME21N",
+        "Verify PO status shows 'Awaiting Approval'",
+        "Login as approver user",
+        "Navigate to approval workflow (ME28 or custom transaction)",
+        "Review purchase order details",
+        "Add approval comments if required",
+        "Approve the purchase order",
+        "Verify approval is recorded",
+        "Check PO status changes to 'Approved'",
+        "Validate email notifications are sent"
+      ],
+      "test_data": {
+        "vendor": "V001",
+        "material": "M001",
+        "quantity": "100",
+        "net_value": "50000",
+        "approver": "APPROVER01"
+      },
+      "validations": [
+        "PO requires approval due to value threshold",
+        "Workflow is triggered automatically",
+        "Approver receives notification",
+        "Approval comments are captured",
+        "PO status updated after approval",
+        "Original requestor is notified"
+      ],
+      "expected_result": "Purchase order approved successfully through workflow",
+      "prerequisites": [
+        "Approval workflow is configured",
+        "Value limits are defined",
+        "Approver has necessary authorization"
+      ]
+    },
+    "goods_receipt": {
+      "name": "Goods Receipt Processing",
+      "transaction": "MIGO",
+      "description": "Process goods receipt against purchase order",
+      "steps": [
+        "Navigate to transaction MIGO",
+        "Select 'Goods Receipt' and 'Purchase Order'",
+        "Enter purchase order number",
+        "Verify line items are displayed",
+        "Enter delivery note number",
+        "Confirm quantity received",
+        "Check material document posting",
+        "Verify stock update in inventory",
+        "Save the goods receipt",
+        "Print goods receipt document if required"
+      ],
+      "test_data": {
+        "purchase_order": "4500001234",
+        "delivery_note": "DN001",
+        "quantity_received": "10",
+        "storage_location": "0001"
+      },
+      "validations": [
+        "Material document is created",
+        "Stock levels are updated",
+        "GR/IR account is posted",
+        "Document flow is maintained",
+        "Quantity tolerance checks pass"
+      ],
+      "expected_result": "Goods receipt posted successfully with material document",
+      "prerequisites": [
+        "Valid purchase order exists",
+        "Storage location is maintained",
+        "User has posting authorization"
+      ]
+    },
+    "invoice_entry": {
+      "name": "Vendor Invoice Entry",
+      "transaction": "FB60",
+      "description": "Enter vendor invoice for payment processing",
+      "steps": [
+        "Navigate to transaction FB60",
+        "Enter vendor number",
+        "Enter invoice date and due date",
+        "Enter reference and invoice number",
+        "Enter gross amount",
+        "Distribute to GL accounts or cost centers",
+        "Calculate tax amounts",
+        "Verify tax code assignment",
+        "Check document balance",
+        "Post the invoice document",
+        "Note document number generated"
+      ],
+      "test_data": {
+        "vendor": "V001",
+        "invoice_number": "INV001",
+        "gross_amount": "1000",
+        "tax_code": "V1",
+        "gl_account": "400000"
+      },
+      "validations": [
+        "Document is balanced (debit = credit)",
+        "Tax calculation is correct",
+        "Vendor balance is updated",
+        "GL account is posted",
+        "Document number is generated"
+      ],
+      "expected_result": "Vendor invoice posted successfully",
+      "prerequisites": [
+        "Vendor master data exists",
+        "GL accounts are valid",
+        "Tax configuration is correct"
+      ]
+    },
+    "sales_order_creation": {
+      "name": "Sales Order Creation",
+      "transaction": "VA01",
+      "description": "Create sales order for customer requirements",
+      "steps": [
+        "Navigate to transaction VA01",
+        "Enter order type",
+        "Enter sold-to party (customer)",
+        "Enter ship-to party if different",
+        "Add material line items",
+        "Enter quantity requested",
+        "Verify pricing calculation",
+        "Check availability (ATP)",
+        "Enter delivery date",
+        "Save the sales order",
+        "Note sales order number"
+      ],
+      "test_data": {
+        "customer": "C001",
+        "material": "M001",
+        "quantity": "5",
+        "order_type": "OR",
+        "delivery_date": "2024-08-15"
+      },
+      "validations": [
+        "Sales order number is generated",
+        "Pricing is calculated correctly",
+        "ATP check confirms availability",
+        "Delivery schedule is created",
+        "Customer credit check passes"
+      ],
+      "expected_result": "Sales order created successfully",
+      "prerequisites": [
+        "Customer master data exists",
+        "Material master data exists",
+        "Pricing conditions are maintained"
+      ]
+    },
+    "three_way_match": {
+      "name": "Three-Way Match Validation",
+      "transaction": "MIRO",
+      "description": "Validate invoice receipt with three-way matching",
+      "steps": [
+        "Navigate to transaction MIRO",
+        "Enter purchase order number",
+        "Enter invoice details from vendor",
+        "Verify line item details match PO",
+        "Check goods receipt reference",
+        "Validate quantity invoiced vs received",
+        "Check price variances",
+        "Review tolerance violations",
+        "Post if within tolerance",
+        "Handle exceptions if variances exist"
+      ],
+      "test_data": {
+        "purchase_order": "4500001234",
+        "invoice_number": "VINV001",
+        "invoice_amount": "1000",
+        "goods_receipt": "5000001234"
+      },
+      "validations": [
+        "PO, GR, and invoice quantities match",
+        "Prices are within tolerance",
+        "Tax calculations are correct",
+        "Account assignments match",
+        "Variances are within limits"
+      ],
+      "expected_result": "Invoice processed successfully with three-way match",
+      "prerequisites": [
+        "Purchase order exists",
+        "Goods receipt is posted",
+        "Tolerance limits are configured"
+      ]
+    }
+  },
+  "test_categories": {
+    "functional": {
+      "name": "Functional Testing",
+      "description": "Test business process functionality"
+    },
+    "integration": {
+      "name": "Integration Testing", 
+      "description": "Test integration between modules"
+    },
+    "workflow": {
+      "name": "Workflow Testing",
+      "description": "Test approval and business workflows"
+    },
+    "validation": {
+      "name": "Data Validation Testing",
+      "description": "Test data validation and controls"
+    },
+    "security": {
+      "name": "Security Testing",
+      "description": "Test authorization and access controls"
+    }
+  },
+  "validation_patterns": [
+    {
+      "type": "document_number_generation",
+      "pattern": "Verify system generates unique document number",
+      "applicable_transactions": ["ME21N", "FB60", "VA01", "MIGO", "VF01"]
+    },
+    {
+      "type": "status_update",
+      "pattern": "Verify document status is updated correctly",
+      "applicable_transactions": ["ME21N", "VA01", "ME28"]
+    },
+    {
+      "type": "balance_validation", 
+      "pattern": "Verify debit equals credit in financial postings",
+      "applicable_transactions": ["FB60", "MIGO", "VF01"]
+    },
+    {
+      "type": "master_data_validation",
+      "pattern": "Verify master data existence and validity",
+      "applicable_transactions": ["ME21N", "VA01", "FB60"]
+    },
+    {
+      "type": "authorization_check",
+      "pattern": "Verify user has necessary authorization",
+      "applicable_transactions": ["ME21N", "FB60", "VA01", "MIGO"]
+    }
+  ]
+} 

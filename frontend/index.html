@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTC - Agentic SAP Testing Copilot</title>
+    <link rel="stylesheet" href="public/styles.css?v=20250802">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="logo">ASTC</h1>
+                    <span class="subtitle">Agentic SAP Testing Copilot</span>
+                </div>
+                <div class="header-actions">
+                    <div class="system-status" id="systemStatus">
+                        <span class="status-indicator" id="statusIndicator"></span>
+                        <span class="status-text" id="statusText">Connecting...</span>
+                    </div>
+                    <button class="btn btn-secondary" id="settingsBtn">Settings</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="nav-menu">
+                    <div class="nav-section">
+                        <h3>Copilot Console</h3>
+                        <ul>
+                            <li><a href="#" class="nav-link" data-view="chat">Copilot Console</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-section">
+                        <h3>Dashboards</h3>
+                        <ul>
+                            <li><a href="#" class="nav-link active" data-view="platform-overview">Platform Overview</a></li>
+                            <li><a href="#" class="nav-link" data-view="dashboard">SAP Intelligence</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-section">
+                        <h3>SAP Operations</h3>
+                        <ul>
+                            <li><a href="#" class="nav-link" data-view="dependencies">Dependency Analysis</a></li>
+                            <li><a href="#" class="nav-link" data-view="tests">AI Test Designer</a></li>
+                            <li><a href="#" class="nav-link" data-view="scripts">Automation Studio</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-section">
+                        <h3>Agent Operations</h3>
+                        <ul>
+                            <li><a href="#" class="nav-link" data-view="agents">Agent Status</a></li>
+                            <li><a href="#" class="nav-link" data-view="agent-network">Agent Network</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                
+            </aside>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Platform Overview View (NEW) -->
+                <div id="platform-overviewView" class="view active">
+                    <div class="view-header">
+                        <h1>ASTC Executive Insights Dashboard</h1>
+                        <p class="subtitle">Key metrics from your AI-powered testing copilot</p>
+                    </div>
+                    
+                    <!-- Executive Metrics Grid -->
+                    <div class="executive-grid">
+                        <!-- Risk Score Card -->
+                        <div class="executive-card" data-metric="risk-score">
+                            <div class="card-header">
+                                <h3>Risk Score</h3>
+                                <span class="card-subtitle">System-wide risk assessment</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value">8.5</div>
+                                <div class="metric-label">out of 10</div>
+                                <div class="metric-trend">↗ +0.3 from last month</div>
+                            </div>
+                        </div>
+
+                        <!-- Test Coverage Card -->
+                        <div class="executive-card" data-metric="test-coverage">
+                            <div class="card-header">
+                                <h3>Test Coverage</h3>
+                                <span class="card-subtitle">Automated test coverage</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value">78%</div>
+                                <div class="metric-label">of critical paths</div>
+                                <div class="metric-trend positive">↗ +12% this quarter</div>
+                            </div>
+                        </div>
+
+                        <!-- Productivity Gain Card -->
+                        <div class="executive-card" data-metric="productivity-gain">
+                            <div class="card-header">
+                                <h3>Productivity Gain</h3>
+                                <span class="card-subtitle">AI-assisted testing</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value positive">+52%</div>
+                                <div class="metric-label">time savings</div>
+                                <div class="metric-trend positive">↗ 13 days saved this month</div>
+                            </div>
+                        </div>
+
+                        <!-- Process Efficiency Card -->
+                        <div class="executive-card" data-metric="process-efficiency">
+                            <div class="card-header">
+                                <h3>Process Efficiency</h3>
+                                <span class="card-subtitle">End-to-end optimization</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value positive">+45%</div>
+                                <div class="metric-label">faster delivery</div>
+                                <div class="metric-trend positive">↗ 6.2 days average</div>
+                            </div>
+                        </div>
+
+                        <!-- User Satisfaction Card -->
+                        <div class="executive-card" data-metric="user-satisfaction">
+                            <div class="card-header">
+                                <h3>User Satisfaction</h3>
+                                <span class="card-subtitle">Platform adoption rate</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="metric-value">92%</div>
+                                <div class="metric-label">satisfaction score</div>
+                                <div class="metric-trend positive">↗ +5% from survey</div>
+                            </div>
+                        </div>
+
+                        <!-- Business Impact Card -->
+                        <div class="executive-card" data-metric="business-impact">
+                            <div class="card-header">
+                                <h3>Business Impact</h3>
+                                <span class="card-subtitle">Critical process analysis</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="impact-indicator">
+                                    <div class="impact-level-badge high">High Risk</div>
+                                    <div class="impact-process">Procure-to-Pay Process</div>
+                                    <div class="impact-details">45 dependencies • 3 transports</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SAP Intelligence Dashboard View (MODIFIED) -->
+                <div id="dashboardView" class="view">
+                    <div class="view-header">
+                        <h1>SAP Intelligence Dashboard</h1>
+                        <p class="subtitle">Real-time insights into SAP transports, changes, and testing impact</p>
+                    </div>
+                    
+                    <!-- SAP Intelligence Cards -->
+                    <div class="sap-intelligence-grid">
+                        <!-- Transport Activity Card -->
+                        <div class="sap-intel-card">
+                            <div class="card-header">
+                                <div class="card-icon">⭕</div>
+                                <h3>Transport Activity</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="transport-summary">3 transports in pipeline</div>
+                                <div class="transport-status">
+                                    <div class="status-line">Status: TR001 ready for QA</div>
+                                    <div class="status-line">TR002 in dev</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Objects Modified Card -->
+                        <div class="sap-intel-card">
+                            <div class="card-header">
+                                <div class="card-icon">⭕</div>
+                                <h3>Objects Modified</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="objects-summary">23 ABAP objects changed</div>
+                                <div class="object-breakdown">
+                                    <div class="object-line">Custom Programs <span class="count">12</span></div>
+                                    <div class="object-line">Tables <span class="count">8</span></div>
+                                    <div class="object-line">Config Settings <span class="count">3</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Change Complexity Card -->
+                        <div class="sap-intel-card">
+                            <div class="card-header">
+                                <h3>Change Complexity</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="complexity-header">
+                                    <span class="transport-id">TR001</span>
+                                    <span class="complexity-badge">High Complexity</span>
+                                </div>
+                                <div class="complexity-details">45 objects affected</div>
+                            </div>
+                        </div>
+
+                        <!-- Module Impact Card -->
+                        <div class="sap-intel-card module-impact">
+                            <div class="card-header">
+                                <div class="card-icon">▢</div>
+                                <h3>Module Impact</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="module-bars">
+                                    <div class="module-bar-item">
+                                        <div class="bar-container">
+                                            <div class="bar-fill" style="width: 60%;"></div>
+                                        </div>
+                                        <div class="bar-line"></div>
+                                    </div>
+                                    <div class="module-bar-item">
+                                        <div class="bar-container">
+                                            <div class="bar-fill" style="width: 40%;"></div>
+                                        </div>
+                                        <div class="bar-line"></div>
+                                    </div>
+                                    <div class="module-bar-item">
+                                        <div class="bar-container">
+                                            <div class="bar-fill" style="width: 25%;"></div>
+                                        </div>
+                                        <div class="bar-line"></div>
+                                    </div>
+                                    <div class="module-bar-item">
+                                        <div class="bar-container">
+                                            <div class="bar-fill" style="width: 15%;"></div>
+                                        </div>
+                                        <div class="bar-line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Custom Code Focus Card -->
+                        <div class="sap-intel-card custom-code">
+                            <div class="card-header">
+                                <div class="card-icon">⭕</div>
+                                <h3>Custom Code Focus</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="programs-header">Top modified programs:</div>
+                                <div class="program-list">
+                                    <div class="program-name">Z_VENDOR_CHECK</div>
+                                    <div class="program-name">Z_PO_APPROVAL</div>
+                                </div>
+                                <div class="coverage-circle">
+                                    <div class="circle-background">
+                                        <div class="circle-text">
+                                            <span class="coverage-percent">78%</span>
+                                            <span class="coverage-label">Coverage</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <footer class="dashboard-footer">
+                        ASTC Copilot v0.1 – Powered by Neuro-San GenAI Platform
+                    </footer>
+                </div>
+
+                <!-- SAP Intelligence Chat Interface View -->
+                <div id="chatView" class="view">
+                    <div class="view-header">
+                        <h2>🤖 SAP Intelligence Copilot</h2>
+                        <p>Ask ASTC about your SAP changes, testing requirements, and transport analysis</p>
+                    </div>
+                    
+                    <!-- TOP SECTION - PROMINENT INPUT -->
+                    <div class="chat-input-section">
+                        <textarea 
+                            id="chatInput" 
+                            placeholder="Ask ASTC about your SAP changes, transports, or testing needs...
+
+Examples:
+• What should I test for ME21N transaction?
+• Analyze dependencies for Z_PO_APPROVAL program
+• Generate test cases for FB60 invoice entry"
+                            autofocus
+                            style="width: 100% !important; height: 150px !important; min-height: 150px !important; font-size: 18px !important; padding: 20px !important; border: 3px solid #3b82f6 !important; border-radius: 12px !important; box-sizing: border-box !important; background: #ffffff !important; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15) !important;"
+                        ></textarea>
+                        <button class="ask-button" id="sendBtn" onclick="sendMessage()">
+                            <span class="button-icon">🚀</span>
+                            Ask ASTC
+                        </button>
+                        <div class="processing-indicator" id="processingIndicator" style="display: none;">
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <span class="processing-text">ASTC is thinking...</span>
+                        </div>
+                    </div>
+                    
+                    <!-- SUGGESTED QUESTIONS - Fixed position below input -->
+                    <div class="suggestions-section">
+                        <h3 class="suggestions-title">💡 Try asking ASTC about:</h3>
+                        <div class="suggestion-buttons">
+                            <button class="suggestion-btn" onclick="askQuestion('What should I test for ME21N purchase order transaction?')">
+                                What should I test for ME21N purchase order transaction?
+                            </button>
+                            <button class="suggestion-btn" onclick="askQuestion('Generate test cases for FB60 invoice entry')">
+                                Generate test cases for FB60 invoice entry
+                            </button>
+                            <button class="suggestion-btn" onclick="askQuestion('Analyze dependencies for Z_PO_APPROVAL program')">
+                                Analyze dependencies for Z_PO_APPROVAL program
+                            </button>
+                            <button class="suggestion-btn" onclick="askQuestion('What are the risks with VA01 sales order creation?')">
+                                What are the risks with VA01 sales order creation?
+                            </button>
+                            <button class="suggestion-btn" onclick="askQuestion('Test scenarios for MIGO goods receipt')">
+                                Test scenarios for MIGO goods receipt
+                            </button>
+                            <button class="suggestion-btn" onclick="askQuestion('Integration testing for MM and FI modules')">
+                                Integration testing for MM and FI modules
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- CONVERSATION AREA -->
+                    <div class="conversation-area" id="chatMessages">
+                        <!-- Conversation messages will appear here -->
+                    </div>
+                </div>
+
+                <!-- Dependencies View -->
+                <div id="dependenciesView" class="view">
+                    <div class="view-header">
+                        <h2>🔗 SAP Dependency Analysis by Multi-Agent System</h2>
+                        <p>Interactive visualization powered by Dependency Analysis & Intelligence Agents</p>
+                        <div class="agent-attribution-header">
+                            <span class="agent-badge-large">🔗 Dependency Analysis Agent</span>
+                            <span class="agent-badge-large">🎯 Dependency Intelligence Agent</span>
+                            <span class="timestamp">Real-time analysis • 89% confidence</span>
+                        </div>
+                    </div>
+                    
+                    <div class="dependencies-container">
+                        <div class="dependencies-controls">
+                            <div class="control-group">
+                                <label for="transactionSelect">Transaction:</label>
+                                <select id="transactionSelect" onchange="loadDependencies()">
+                                    <option value="">Select a transaction</option>
+                                    <option value="ME21N">ME21N - Create Purchase Order</option>
+                                    <option value="FB60">FB60 - Enter Incoming Invoice</option>
+                                    <option value="VA01">VA01 - Create Sales Order</option>
+                                    <option value="MIGO">MIGO - Goods Movement</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="depthSlider">Analysis Depth:</label>
+                                <input type="range" id="depthSlider" min="1" max="5" value="2" onchange="updateDepth()">
+                                <span id="depthValue">2</span>
+                            </div>
+                        </div>
+                        
+                        <div class="dependency-graph" id="dependencyGraph">
+                            <div class="graph-placeholder">
+                                <div class="placeholder-icon">🔗</div>
+                                <p>Select a transaction to view dependencies</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dependency-details" id="dependencyDetails" style="display: none;">
+                            <h4>Dependency Details</h4>
+                            <div class="details-content" id="detailsContent"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Cases View -->
+                <div id="testsView" class="view">
+                    <div class="view-header">
+                        <h2>🧪 AI-Generated Test Cases by Test Generation Agent</h2>
+                        <p>Comprehensive SAP test cases from transport TR001 analysis</p>
+                        <div class="agent-attribution-header">
+                            <span class="agent-badge-large">🧪 Test Generation Agent</span>
+                            <span class="timestamp">Generated from SAP Intelligence analysis • 5 minutes ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tests-container">
+                        <div class="tests-filters">
+                            <div class="filter-group">
+                                <label for="moduleFilter">Module:</label>
+                                <select id="moduleFilter">
+                                    <option value="">All Modules</option>
+                                    <option value="MM">MM - Materials Management</option>
+                                    <option value="FI">FI - Financial Accounting</option>
+                                    <option value="SD">SD - Sales & Distribution</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="priorityFilter">Priority:</label>
+                                <select id="priorityFilter">
+                                    <option value="">All Priorities</option>
+                                    <option value="high">High</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="low">Low</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="transportFilter">Transport:</label>
+                                <select id="transportFilter">
+                                    <option value="">All Transports</option>
+                                    <option value="TR001">TR001 - Vendor Changes</option>
+                                    <option value="TR002">TR002 - PO Workflow</option>
+                                </select>
+                            </div>
+                            <div class="export-group">
+                                <button class="btn btn-primary" onclick="exportAllTestCases()">📄 Export All</button>
+                                <button class="btn btn-secondary" onclick="generateMoreTests()">🔄 Generate More</button>
+                            </div>
+                        </div>
+                        
+                        <div class="test-cases-list" id="testCasesList">
+                            <!-- Test Case TC001 -->
+                            <div class="test-case-card" data-priority="high" data-module="MM" data-transport="TR001">
+                                <div class="test-case-header">
+                                    <div class="test-case-id">TC001</div>
+                                    <div class="test-case-title">ME21N Purchase Order with Vendor Validation</div>
+                                    <div class="test-case-meta">
+                                        <span class="priority high">High Priority</span>
+                                        <span class="module">MM</span>
+                                        <span class="transport">TR001</span>
+                                    </div>
+                                </div>
+                                <div class="test-case-content">
+                                    <div class="test-generation-info">
+                                        <strong>Generated by:</strong> Test Generation Agent (based on SAP Intelligence analysis of TR001)<br>
+                                        <strong>Business Process:</strong> Procure-to-Pay
+                                    </div>
+                                    <div class="test-steps">
+                                        <h4>📋 Test Steps (8 steps):</h4>
+                                        <ol>
+                                            <li>Login to SAP system with MM01 user credentials</li>
+                                            <li>Navigate to transaction ME21N (Create Purchase Order)</li>
+                                            <li>Enter vendor code V001 in vendor field</li>
+                                            <li>Enter material M001, quantity 10, price $500</li>
+                                            <li>Verify vendor validation logic from Z_VENDOR_CHECK</li>
+                                            <li>Save purchase order and capture PO number</li>
+                                            <li>Trigger approval workflow</li>
+                                            <li>Verify PO status = "Pending Approval"</li>
+                                        </ol>
+                                    </div>
+                                    <div class="test-data">
+                                        <h4>📊 Test Data:</h4>
+                                        <ul>
+                                            <li><strong>Vendor:</strong> V001 (Test Vendor Corp)</li>
+                                            <li><strong>Material:</strong> M001 (Test Material)</li>
+                                            <li><strong>Quantity:</strong> 10 units</li>
+                                            <li><strong>Amount:</strong> $5,000</li>
+                                            <li><strong>Plant:</strong> 1000</li>
+                                        </ul>
+                                    </div>
+                                    <div class="expected-results">
+                                        <h4>✅ Expected Results:</h4>
+                                        <ul>
+                                            <li>PO created successfully with valid PO number</li>
+                                            <li>Vendor validation passes Z_VENDOR_CHECK logic</li>
+                                            <li>Approval workflow triggered automatically</li>
+                                            <li>Status updated to "Pending Approval"</li>
+                                        </ul>
+                                    </div>
+                                    <div class="test-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="exportTestCase('TC001')">📄 Export</button>
+                                        <button class="btn btn-sm btn-secondary" onclick="convertToScript('TC001')">🤖 Convert to Script</button>
+                                        <button class="btn btn-sm btn-success" onclick="executeTest('TC001')">▶️ Execute</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test Case TC002 -->
+                            <div class="test-case-card" data-priority="high" data-module="MM" data-transport="TR001">
+                                <div class="test-case-header">
+                                    <div class="test-case-id">TC002</div>
+                                    <div class="test-case-title">Z_VENDOR_CHECK Validation Testing</div>
+                                    <div class="test-case-meta">
+                                        <span class="priority high">High Priority</span>
+                                        <span class="module">MM</span>
+                                        <span class="transport">TR001</span>
+                                    </div>
+                                </div>
+                                <div class="test-case-content">
+                                    <div class="test-generation-info">
+                                        <strong>Generated by:</strong> Test Generation Agent (custom program focus)<br>
+                                        <strong>Business Process:</strong> Vendor Master Validation
+                                    </div>
+                                    <div class="test-steps">
+                                        <h4>📋 Test Steps (6 steps):</h4>
+                                        <ol>
+                                            <li>Access Z_VENDOR_CHECK program directly</li>
+                                            <li>Input vendor V001 with valid data</li>
+                                            <li>Test validation logic for credit limit check</li>
+                                            <li>Test validation logic for payment terms</li>
+                                            <li>Verify error handling for invalid vendors</li>
+                                            <li>Confirm validation results match business rules</li>
+                                        </ol>
+                                    </div>
+                                    <div class="test-data">
+                                        <h4>📊 Test Data:</h4>
+                                        <ul>
+                                            <li><strong>Valid Vendor:</strong> V001</li>
+                                            <li><strong>Invalid Vendor:</strong> V999</li>
+                                            <li><strong>Credit Limit:</strong> $50,000</li>
+                                            <li><strong>Payment Terms:</strong> NET30</li>
+                                        </ul>
+                                    </div>
+                                    <div class="expected-results">
+                                        <h4>✅ Expected Results:</h4>
+                                        <ul>
+                                            <li>Valid vendor passes all validation checks</li>
+                                            <li>Invalid vendor triggers appropriate error messages</li>
+                                            <li>Credit limit validation works correctly</li>
+                                            <li>Payment terms validation functions properly</li>
+                                        </ul>
+                                    </div>
+                                    <div class="test-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="exportTestCase('TC002')">📄 Export</button>
+                                        <button class="btn btn-sm btn-secondary" onclick="convertToScript('TC002')">🤖 Convert to Script</button>
+                                        <button class="btn btn-sm btn-success" onclick="executeTest('TC002')">▶️ Execute</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test Case TC003 -->
+                            <div class="test-case-card" data-priority="medium" data-module="FI" data-transport="TR001">
+                                <div class="test-case-header">
+                                    <div class="test-case-id">TC003</div>
+                                    <div class="test-case-title">FB60 Invoice Entry Integration Test</div>
+                                    <div class="test-case-meta">
+                                        <span class="priority medium">Medium Priority</span>
+                                        <span class="module">FI</span>
+                                        <span class="transport">TR001</span>
+                                    </div>
+                                </div>
+                                <div class="test-case-content">
+                                    <div class="test-generation-info">
+                                        <strong>Generated by:</strong> Test Generation Agent (MM+FI integration analysis)<br>
+                                        <strong>Business Process:</strong> Invoice Processing
+                                    </div>
+                                    <div class="test-steps">
+                                        <h4>📋 Test Steps (7 steps):</h4>
+                                        <ol>
+                                            <li>Create PO using ME21N with vendor V001</li>
+                                            <li>Post goods receipt using MIGO</li>
+                                            <li>Navigate to FB60 for invoice entry</li>
+                                            <li>Enter invoice referencing created PO</li>
+                                            <li>Verify 3-way matching (PO, GR, Invoice)</li>
+                                            <li>Check vendor validation integration</li>
+                                            <li>Post invoice and verify GL entries</li>
+                                        </ol>
+                                    </div>
+                                    <div class="test-data">
+                                        <h4>📊 Test Data:</h4>
+                                        <ul>
+                                            <li><strong>PO Number:</strong> [From TC001]</li>
+                                            <li><strong>Invoice Amount:</strong> $5,000</li>
+                                            <li><strong>Invoice Date:</strong> Current date</li>
+                                            <li><strong>GL Account:</strong> 400000</li>
+                                        </ul>
+                                    </div>
+                                    <div class="expected-results">
+                                        <h4>✅ Expected Results:</h4>
+                                        <ul>
+                                            <li>3-way match successful</li>
+                                            <li>Vendor validation passes</li>
+                                            <li>Invoice posted successfully</li>
+                                            <li>Correct GL entries created</li>
+                                        </ul>
+                                    </div>
+                                    <div class="test-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="exportTestCase('TC003')">📄 Export</button>
+                                        <button class="btn btn-sm btn-secondary" onclick="convertToScript('TC003')">🤖 Convert to Script</button>
+                                        <button class="btn btn-sm btn-success" onclick="executeTest('TC003')">▶️ Execute</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test Case TC004 -->
+                            <div class="test-case-card" data-priority="medium" data-module="MM" data-transport="TR002">
+                                <div class="test-case-header">
+                                    <div class="test-case-id">TC004</div>
+                                    <div class="test-case-title">Z_PO_APPROVAL Workflow Testing</div>
+                                    <div class="test-case-meta">
+                                        <span class="priority medium">Medium Priority</span>
+                                        <span class="module">MM</span>
+                                        <span class="transport">TR002</span>
+                                    </div>
+                                </div>
+                                <div class="test-case-content">
+                                    <div class="test-generation-info">
+                                        <strong>Generated by:</strong> Test Generation Agent (workflow analysis)<br>
+                                        <strong>Business Process:</strong> Purchase Order Approval
+                                    </div>
+                                    <div class="test-steps">
+                                        <h4>📋 Test Steps (9 steps):</h4>
+                                        <ol>
+                                            <li>Create PO with amount > $10,000 (approval threshold)</li>
+                                            <li>Verify Z_PO_APPROVAL program triggers</li>
+                                            <li>Check workflow item created in SWIA</li>
+                                            <li>Login as approver (manager role)</li>
+                                            <li>Access approval workflow item</li>
+                                            <li>Review PO details and approve</li>
+                                            <li>Verify PO status updated to "Approved"</li>
+                                            <li>Test rejection scenario</li>
+                                            <li>Confirm notification sent to requester</li>
+                                        </ol>
+                                    </div>
+                                    <div class="test-data">
+                                        <h4>📊 Test Data:</h4>
+                                        <ul>
+                                            <li><strong>PO Amount:</strong> $15,000 (above threshold)</li>
+                                            <li><strong>Requester:</strong> USER001</li>
+                                            <li><strong>Approver:</strong> MGR001</li>
+                                            <li><strong>Material:</strong> M002</li>
+                                        </ul>
+                                    </div>
+                                    <div class="expected-results">
+                                        <h4>✅ Expected Results:</h4>
+                                        <ul>
+                                            <li>Approval workflow triggered automatically</li>
+                                            <li>Workflow item appears in approver's inbox</li>
+                                            <li>Approval updates PO status correctly</li>
+                                            <li>Rejection sends notification to requester</li>
+                                        </ul>
+                                    </div>
+                                    <div class="test-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="exportTestCase('TC004')">📄 Export</button>
+                                        <button class="btn btn-sm btn-secondary" onclick="convertToScript('TC004')">🤖 Convert to Script</button>
+                                        <button class="btn btn-sm btn-success" onclick="executeTest('TC004')">▶️ Execute</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test Case TC005 -->
+                            <div class="test-case-card" data-priority="low" data-module="SD" data-transport="TR002">
+                                <div class="test-case-header">
+                                    <div class="test-case-id">TC005</div>
+                                    <div class="test-case-title">VA01 Sales Order Integration Test</div>
+                                    <div class="test-case-meta">
+                                        <span class="priority low">Low Priority</span>
+                                        <span class="module">SD</span>
+                                        <span class="transport">TR002</span>
+                                    </div>
+                                </div>
+                                <div class="test-case-content">
+                                    <div class="test-generation-info">
+                                        <strong>Generated by:</strong> Test Generation Agent (cross-module impact)<br>
+                                        <strong>Business Process:</strong> Order-to-Cash
+                                    </div>
+                                    <div class="test-steps">
+                                        <h4>📋 Test Steps (6 steps):</h4>
+                                        <ol>
+                                            <li>Access VA01 transaction</li>
+                                            <li>Create sales order for customer C001</li>
+                                            <li>Add material M001 with quantity 5</li>
+                                            <li>Verify availability check</li>
+                                            <li>Save sales order</li>
+                                            <li>Check impact on MM inventory</li>
+                                        </ol>
+                                    </div>
+                                    <div class="test-data">
+                                        <h4>📊 Test Data:</h4>
+                                        <ul>
+                                            <li><strong>Customer:</strong> C001</li>
+                                            <li><strong>Material:</strong> M001</li>
+                                            <li><strong>Quantity:</strong> 5 units</li>
+                                            <li><strong>Price:</strong> $100/unit</li>
+                                        </ul>
+                                    </div>
+                                    <div class="expected-results">
+                                        <h4>✅ Expected Results:</h4>
+                                        <ul>
+                                            <li>Sales order created successfully</li>
+                                            <li>Availability check passes</li>
+                                            <li>Inventory reserved in MM</li>
+                                            <li>Order status = "Open"</li>
+                                        </ul>
+                                    </div>
+                                    <div class="test-actions">
+                                        <button class="btn btn-sm btn-primary" onclick="exportTestCase('TC005')">📄 Export</button>
+                                        <button class="btn btn-sm btn-secondary" onclick="convertToScript('TC005')">🤖 Convert to Script</button>
+                                        <button class="btn btn-sm btn-success" onclick="executeTest('TC005')">▶️ Execute</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="test-summary">
+                            <div class="summary-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">5</span>
+                                    <span class="stat-label">Test Cases Generated</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">36</span>
+                                    <span class="stat-label">Total Test Steps</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">3</span>
+                                    <span class="stat-label">SAP Modules Covered</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">2</span>
+                                    <span class="stat-label">Transports Analyzed</span>
+                                </div>
+                            </div>
+                            <div class="summary-footer">
+                                <p>✨ All test cases generated by <strong>Test Generation Agent</strong> based on SAP Intelligence analysis</p>
+                                <p>🔄 Ready for conversion to automation scripts via <strong>Script Generation Agent</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Execution View -->
+                <div id="executionView" class="view">
+                    <div class="view-header">
+                        <h2>Test Execution Results</h2>
+                        <p>Real-time test execution monitoring with auto-healing</p>
+                    </div>
+                    
+                    <div class="execution-container">
+                        <!-- Summary Stats -->
+                        <div class="execution-summary">
+                            <div id="executionSummaryStats" class="summary-stats">
+                                <!-- Summary stats will be loaded here -->
+                            </div>
+                            
+                            <div id="realTimeStats" class="real-time-stats">
+                                <!-- Real-time monitoring stats will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Execution Controls -->
+                        <div class="execution-controls">
+                            <div class="controls-left">
+                                <div class="filter-group">
+                                    <label for="executionStatusFilter">Status:</label>
+                                    <select id="executionStatusFilter">
+                                        <option value="">All Status</option>
+                                        <option value="running">Running</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="failed">Failed</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label for="executionTransactionFilter">Transaction:</label>
+                                    <select id="executionTransactionFilter">
+                                        <option value="">All Transactions</option>
+                                        <option value="ME21N">ME21N</option>
+                                        <option value="MIGO">MIGO</option>
+                                        <option value="VA01">VA01</option>
+                                        <option value="FB60">FB60</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="controls-right">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="autoRefreshToggle" checked>
+                                    <span class="toggle-slider"></span>
+                                    Auto-refresh
+                                </label>
+                                <button class="btn btn-secondary" onclick="testExecutionResults.refreshExecutionData()">
+                                    🔄 Refresh
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Content Area -->
+                        <div class="execution-main">
+                            <!-- Executions List -->
+                            <div class="execution-left-panel">
+                                <h3>Execution History</h3>
+                                <div class="executions-list" id="executionsList">
+                                    <div class="no-executions-placeholder">
+                                        <div class="placeholder-icon">⚡</div>
+                                        <p>No test executions yet</p>
+                                        <p>Run some tests to see execution results here</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Execution Details -->
+                            <div class="execution-right-panel">
+                                <h3>Execution Details</h3>
+                                <div class="execution-details" id="executionDetails">
+                                    <div class="no-selection-placeholder">
+                                        <div class="placeholder-icon">📊</div>
+                                        <p>Select an execution to view details</p>
+                                        <p>See real-time progress, performance metrics, and auto-healing results</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Auto-Healing Panel -->
+                        <div id="autoHealingPanel" class="auto-healing-panel" style="display: none;">
+                            <!-- Auto-healing recommendations will be shown here -->
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Script Generator View -->
+                <div id="scriptsView" class="view">
+                    <div class="view-header">
+                        <h2>📝 Script Generator by Script Generation Agent</h2>
+                        <p>Convert test cases to automation scripts - Robot Framework & Tosca</p>
+                        <div class="agent-attribution-header">
+                            <span class="agent-badge-large">📝 Script Generation Agent</span>
+                            <span class="timestamp">Ready to convert test cases • Real-time generation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="script-generator-container">
+                        <!-- Test Case Selection -->
+                        <div class="test-case-selector">
+                            <h3>🧪 Select Test Case to Convert</h3>
+                            <div class="selector-group">
+                                <label for="testCaseSelect">Test Case:</label>
+                                <select id="testCaseSelect" onchange="loadTestCase()">
+                                    <option value="">Select a test case...</option>
+                                    <option value="TC001">TC001 - ME21N Purchase Order with Vendor Validation</option>
+                                    <option value="TC002">TC002 - Z_VENDOR_CHECK Validation Testing</option>
+                                    <option value="TC003">TC003 - FB60 Invoice Entry Integration Test</option>
+                                    <option value="TC004">TC004 - Z_PO_APPROVAL Workflow Testing</option>
+                                    <option value="TC005">TC005 - VA01 Sales Order Integration Test</option>
+                                </select>
+                                <button class="btn btn-primary" onclick="generateScripts()">🤖 Generate Scripts</button>
+                            </div>
+                        </div>
+
+                        <!-- Script Generation Tabs -->
+                        <div class="script-tabs">
+                            <div class="tab-headers">
+                                <button class="tab-header active" onclick="switchTab('robot')">🤖 Robot Framework</button>
+                                <button class="tab-header" onclick="switchTab('tosca')">🔧 Tosca XML</button>
+                            </div>
+
+                            <!-- Robot Framework Section -->
+                            <div id="robot-tab" class="tab-content active">
+                                <div class="script-section">
+                                    <div class="script-header">
+                                        <h3>🤖 Robot Framework Script</h3>
+                                        <div class="script-actions">
+                                            <button class="btn btn-sm btn-secondary" onclick="copyScript('robot')">📋 Copy</button>
+                                            <button class="btn btn-sm btn-primary" onclick="downloadScript('robot')">💾 Download .robot</button>
+                                            <button class="btn btn-sm btn-success" onclick="validateScript('robot')">✅ Validate</button>
+                                        </div>
+                                    </div>
+                                    <div class="script-content">
+                                        <div class="script-meta">
+                                            <p><strong>Generated by:</strong> Script Generation Agent from TC001</p>
+                                            <p><strong>SAP Libraries:</strong> SapLibrary, BuiltIn, SeleniumLibrary</p>
+                                        </div>
+                                        <pre id="robotScript" class="script-code">*** Settings ***
+Library           SapLibrary
+Library           BuiltIn  
+Library           SeleniumLibrary
+Suite Setup       Connect To SAP
+Suite Teardown    Close SAP Connection
+
+*** Variables ***
+${SAP_HOST}       sap-dev.company.com
+${SAP_CLIENT}     100
+${SAP_USER}       MM01
+${SAP_PASSWORD}   ${EMPTY}
+${VENDOR_CODE}    V001
+${MATERIAL}       M001
+${QUANTITY}       10
+${PRICE}          500
+
+*** Test Cases ***
+TC001 ME21N Purchase Order With Vendor Validation
+    [Documentation]    Generated by Script Generation Agent
+    ...                Test Case: ME21N Purchase Order with Vendor Validation
+    ...                Business Process: Procure-to-Pay
+    [Tags]    SAP    MM    PO    Vendor    High
+    
+    # Step 1: Login to SAP system
+    Open SAP Session    ${SAP_HOST}    ${SAP_CLIENT}
+    Login To SAP        ${SAP_USER}    ${SAP_PASSWORD}
+    
+    # Step 2: Navigate to ME21N transaction
+    Start Transaction   ME21N
+    Wait For Screen     Create Purchase Order
+    
+    # Step 3: Enter vendor code
+    Set Field Value     Vendor    ${VENDOR_CODE}
+    Press Enter
+    Wait For Vendor Validation
+    
+    # Step 4: Enter material details
+    Set Field Value     Material    ${MATERIAL}
+    Set Field Value     Quantity    ${QUANTITY}
+    Set Field Value     Price       ${PRICE}
+    
+    # Step 5: Verify vendor validation (Z_VENDOR_CHECK)
+    ${validation_result}=    Get Field Value    Vendor Status
+    Should Be Equal    ${validation_result}    Valid
+    
+    # Step 6: Save purchase order
+    Press Toolbar Button    Save
+    ${po_number}=    Get Field Value    PO Number
+    Should Not Be Empty    ${po_number}
+    Set Suite Variable    ${PO_NUMBER}    ${po_number}
+    
+    # Step 7: Trigger approval workflow
+    Press Toolbar Button    Release
+    
+    # Step 8: Verify PO status
+    ${po_status}=    Get Field Value    Status
+    Should Be Equal    ${po_status}    Pending Approval
+    
+    [Teardown]    Return To Main Menu
+
+*** Keywords ***
+Connect To SAP
+    [Documentation]    Establish connection to SAP system
+    Open SAP GUI    ${SAP_HOST}
+    
+Close SAP Connection  
+    [Documentation]    Close SAP connection
+    Close SAP GUI
+
+Wait For Vendor Validation
+    [Documentation]    Wait for Z_VENDOR_CHECK validation to complete
+    Wait Until Element Is Visible    Vendor Status    30s
+    
+Login To SAP
+    [Arguments]    ${username}    ${password}
+    [Documentation]    Login to SAP with credentials
+    Set Field Value    User    ${username}
+    Set Field Value    Password    ${password}
+    Press Enter
+    Wait For Screen    SAP Easy Access</pre>
+                                    </div>
+                                    <div class="script-footer">
+                                        <div class="generation-info">
+                                            <span class="info-item">📊 Lines of Code: 67</span>
+                                            <span class="info-item">🔧 Keywords: 4 custom</span>
+                                            <span class="info-item">⏱️ Est. Execution: 3-5 minutes</span>
+                                            <span class="info-item">✅ SAP Libraries: Included</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tosca XML Section -->
+                            <div id="tosca-tab" class="tab-content">
+                                <div class="script-section">
+                                    <div class="script-header">
+                                        <h3>🔧 ToscaTestCase XML</h3>
+                                        <div class="script-actions">
+                                            <button class="btn btn-sm btn-secondary" onclick="copyScript('tosca')">📋 Copy</button>
+                                            <button class="btn btn-sm btn-primary" onclick="downloadScript('tosca')">💾 Download .xml</button>
+                                            <button class="btn btn-sm btn-success" onclick="validateScript('tosca')">✅ Validate</button>
+                                        </div>
+                                    </div>
+                                    <div class="script-content">
+                                        <div class="script-meta">
+                                            <p><strong>Generated by:</strong> Script Generation Agent optimized for Tosca</p>
+                                            <p><strong>Tosca Modules:</strong> SAP_MM, SAP_Common, Business_Objects</p>
+                                        </div>
+                                        <pre id="toscaScript" class="script-code"><?xml version="1.0" encoding="UTF-8"?>
+<TestCase>
+  <Header>
+    <Name>TC001_ME21N_Purchase_Order_Vendor_Validation</Name>
+    <Description>Generated by Script Generation Agent from Test Case TC001</Description>
+    <BusinessProcess>Procure-to-Pay</BusinessProcess>
+    <Module>MM - Materials Management</Module>
+    <Priority>High</Priority>
+    <Tags>SAP,MM,PO,Vendor,Validation</Tags>
+    <GeneratedBy>Script Generation Agent</GeneratedBy>
+    <SourceTestCase>TC001</SourceTestCase>
+  </Header>
+  
+  <TestSteps>
+    <!-- Step 1: SAP Login -->
+    <TestStep id="1" name="Login_To_SAP">
+      <Module>SAP_Common.Login</Module>
+      <BusinessParameters>
+        <Parameter name="System">{CONF[SAP_SYSTEM]}</Parameter>
+        <Parameter name="Client">{CONF[SAP_CLIENT]}</Parameter>
+        <Parameter name="User">{TD[MM_USER]}</Parameter>
+        <Parameter name="Password">{TD[MM_PASSWORD]}</Parameter>
+      </BusinessParameters>
+      <ExpectedResult>SAP Easy Access screen displayed</ExpectedResult>
+    </TestStep>
+    
+    <!-- Step 2: Navigate to ME21N -->
+    <TestStep id="2" name="Start_Transaction_ME21N">
+      <Module>SAP_Common.Start_Transaction</Module>
+      <BusinessParameters>
+        <Parameter name="Transaction_Code">ME21N</Parameter>
+      </BusinessParameters>
+      <ExpectedResult>Create Purchase Order screen opens</ExpectedResult>
+    </TestStep>
+    
+    <!-- Step 3: Enter Vendor -->
+    <TestStep id="3" name="Enter_Vendor_Code">
+      <Module>SAP_MM.PO_Create.Enter_Vendor</Module>
+      <BusinessParameters>
+        <Parameter name="Vendor">{TD[VENDOR_CODE]}</Parameter>
+      </BusinessParameters>
+      <ValidationStep>
+        <Module>SAP_MM.PO_Create.Verify_Vendor_Status</Module>
+        <ExpectedValue>Valid</ExpectedValue>
+      </ValidationStep>
+    </TestStep>
+    
+    <!-- Step 4: Enter Material Details -->
+    <TestStep id="4" name="Enter_Material_Data">
+      <Module>SAP_MM.PO_Create.Add_Material</Module>
+      <BusinessParameters>
+        <Parameter name="Material">{TD[MATERIAL_CODE]}</Parameter>
+        <Parameter name="Quantity">{TD[QUANTITY]}</Parameter>
+        <Parameter name="Price">{TD[UNIT_PRICE]}</Parameter>
+        <Parameter name="Plant">{TD[PLANT]}</Parameter>
+      </BusinessParameters>
+    </TestStep>
+    
+    <!-- Step 5: Validate Vendor Check -->
+    <TestStep id="5" name="Verify_Vendor_Validation">
+      <Module>SAP_MM.Vendor_Validation.Z_VENDOR_CHECK</Module>
+      <BusinessParameters>
+        <Parameter name="Vendor_Code">{TD[VENDOR_CODE]}</Parameter>
+      </BusinessParameters>
+      <ExpectedResult>Validation passed</ExpectedResult>
+    </TestStep>
+    
+    <!-- Step 6: Save Purchase Order -->
+    <TestStep id="6" name="Save_Purchase_Order">
+      <Module>SAP_MM.PO_Create.Save_PO</Module>
+      <BusinessParameters>
+        <Parameter name="Capture_PO_Number">true</Parameter>
+      </BusinessParameters>
+      <OutputParameters>
+        <Parameter name="PO_Number">{BO[CREATED_PO_NUMBER]}</Parameter>
+      </OutputParameters>
+      <ExpectedResult>PO created successfully</ExpectedResult>
+    </TestStep>
+    
+    <!-- Step 7: Trigger Approval -->
+    <TestStep id="7" name="Trigger_Approval_Workflow">
+      <Module>SAP_MM.PO_Approval.Release_PO</Module>
+      <BusinessParameters>
+        <Parameter name="PO_Number">{BO[CREATED_PO_NUMBER]}</Parameter>
+      </BusinessParameters>
+    </TestStep>
+    
+    <!-- Step 8: Verify Status -->
+    <TestStep id="8" name="Verify_PO_Status">
+      <Module>SAP_MM.PO_Status.Check_Status</Module>
+      <BusinessParameters>
+        <Parameter name="PO_Number">{BO[CREATED_PO_NUMBER]}</Parameter>
+      </BusinessParameters>
+      <ExpectedResult>Pending Approval</ExpectedResult>
+    </TestStep>
+  </TestSteps>
+  
+  <TestData>
+    <DataSheet name="TC001_TestData">
+      <Row>
+        <VENDOR_CODE>V001</VENDOR_CODE>
+        <MATERIAL_CODE>M001</MATERIAL_CODE>
+        <QUANTITY>10</QUANTITY>
+        <UNIT_PRICE>500</UNIT_PRICE>
+        <PLANT>1000</PLANT>
+        <MM_USER>MM01</MM_USER>
+        <MM_PASSWORD>{ENCRYPTED}</MM_PASSWORD>
+      </Row>
+    </DataSheet>
+  </TestData>
+  
+  <BusinessObjects>
+    <CREATED_PO_NUMBER type="string" scope="testcase"/>
+  </BusinessObjects>
+  
+</TestCase></pre>
+                                    </div>
+                                    <div class="script-footer">
+                                        <div class="generation-info">
+                                            <span class="info-item">📊 Test Steps: 8</span>
+                                            <span class="info-item">🔧 Tosca Modules: 6</span>
+                                            <span class="info-item">📋 Business Parameters: 12</span>
+                                            <span class="info-item">✅ Ready for Tosca Import</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conversion Summary -->
+                        <div class="conversion-summary">
+                            <h3>🎯 Script Generation Summary</h3>
+                            <div class="summary-grid">
+                                <div class="summary-card">
+                                    <div class="summary-icon">🧪</div>
+                                    <div class="summary-content">
+                                        <h4>Source Test Case</h4>
+                                        <p>TC001 - ME21N Purchase Order</p>
+                                        <span class="summary-meta">Generated by Test Generation Agent</span>
+                                    </div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-icon">🤖</div>
+                                    <div class="summary-content">
+                                        <h4>Robot Framework</h4>
+                                        <p>67 lines, 4 keywords, SAP libraries</p>
+                                        <span class="summary-meta">Ready for execution</span>
+                                    </div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-icon">🔧</div>
+                                    <div class="summary-content">
+                                        <h4>Tosca XML</h4>
+                                        <p>8 steps, 6 modules, business parameters</p>
+                                        <span class="summary-meta">Import into Tosca Commander</span>
+                                    </div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-icon">📝</div>
+                                    <div class="summary-content">
+                                        <h4>Script Generation Agent</h4>
+                                        <p>Converted test case to automation</p>
+                                        <span class="summary-meta">Agent attribution & traceability</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Agent Status View -->
+                <div id="agentsView" class="view">
+                    <div class="view-header">
+                        <h2>🤖 Agent Status - Live Monitoring</h2>
+                        <p>Real-time status and performance monitoring of all ASTC agents</p>
+                        <div class="agent-attribution-header">
+                            <span class="agent-badge-large">5 Active AI Agents</span>
+                            <span class="timestamp">Live monitoring • Real-time status</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-monitoring-container">
+                        <div class="agent-status-section">
+                            <h3>📊 Live Agent Status</h3>
+                            <div class="agents-grid">
+                                <div class="agent-status-card sap-intelligence">
+                                    <div class="agent-header">
+                                        <span class="agent-icon">🧠</span>
+                                        <h4>SAP Intelligence Agent</h4>
+                                        <span class="status-badge processing">Processing</span>
+                                    </div>
+                                    <div class="agent-activity">
+                                        <p><strong>Current Task:</strong> Analyzing transport TR001</p>
+                                        <p><strong>Last Action:</strong> Identified 45 objects modified</p>
+                                        <div class="activity-metrics">
+                                            <span class="metric">✅ Requests: 127</span>
+                                            <span class="metric">⏱️ Avg Time: 2.3s</span>
+                                            <span class="metric">🎯 Success: 98%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="agent-status-card test-generation">
+                                    <div class="agent-header">
+                                        <span class="agent-icon">🧪</span>
+                                        <h4>Test Generation Agent</h4>
+                                        <span class="status-badge ready">Ready</span>
+                                    </div>
+                                    <div class="agent-activity">
+                                        <p><strong>Current Task:</strong> Generated 5 test cases</p>
+                                        <p><strong>Last Action:</strong> Created TC005 for VA01</p>
+                                        <div class="activity-metrics">
+                                            <span class="metric">📝 Generated: 47</span>
+                                            <span class="metric">⏱️ Avg Time: 4.1s</span>
+                                            <span class="metric">🎯 Quality: 95%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="agent-status-card script-generation">
+                                    <div class="agent-header">
+                                        <span class="agent-icon">📝</span>
+                                        <h4>Script Generation Agent</h4>
+                                        <span class="status-badge ready">Ready</span>
+                                    </div>
+                                    <div class="agent-activity">
+                                        <p><strong>Current Task:</strong> Converted TC001 to Robot Framework</p>
+                                        <p><strong>Last Action:</strong> Generated 67-line script</p>
+                                        <div class="activity-metrics">
+                                            <span class="metric">🤖 Scripts: 23</span>
+                                            <span class="metric">⏱️ Avg Time: 3.7s</span>
+                                            <span class="metric">🎯 Executable: 100%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="agent-status-card dependency-analysis">
+                                    <div class="agent-header">
+                                        <span class="agent-icon">🔗</span>
+                                        <h4>Dependency Analysis Agent</h4>
+                                        <span class="status-badge processing">Processing</span>
+                                    </div>
+                                    <div class="agent-activity">
+                                        <p><strong>Current Task:</strong> Mapping Z_VENDOR_CHECK dependencies</p>
+                                        <p><strong>Last Action:</strong> Found 12 dependent objects</p>
+                                        <div class="activity-metrics">
+                                            <span class="metric">🔗 Dependencies: 89</span>
+                                            <span class="metric">⏱️ Avg Time: 5.2s</span>
+                                            <span class="metric">🎯 Accuracy: 92%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="agent-status-card test-execution">
+                                    <div class="agent-header">
+                                        <span class="agent-icon">⚡</span>
+                                        <h4>Test Execution Agent</h4>
+                                        <span class="status-badge ready">Ready</span>
+                                    </div>
+                                    <div class="agent-activity">
+                                        <p><strong>Current Task:</strong> Simulating test execution results</p>
+                                        <p><strong>Last Action:</strong> Validated TC001 steps</p>
+                                        <div class="activity-metrics">
+                                            <span class="metric">▶️ Executed: 34</span>
+                                            <span class="metric">⏱️ Avg Time: 12.4s</span>
+                                            <span class="metric">🎯 Pass Rate: 87%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Performance Metrics -->
+                        <div class="performance-metrics-section">
+                            <h3>⚡ Performance Overview</h3>
+                            <div class="metrics-overview">
+                                <div class="metric-card response-time">
+                                    <div class="metric-icon">⚡</div>
+                                    <div class="metric-content">
+                                        <div class="metric-value">2.3s</div>
+                                        <div class="metric-label">Avg Response</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card success-rate">
+                                    <div class="metric-icon">✅</div>
+                                    <div class="metric-content">
+                                        <div class="metric-value">96%</div>
+                                        <div class="metric-label">Success Rate</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card throughput">
+                                    <div class="metric-icon">🔄</div>
+                                    <div class="metric-content">
+                                        <div class="metric-value">547</div>
+                                        <div class="metric-label">Tasks/Hour</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card uptime">
+                                    <div class="metric-icon">🟢</div>
+                                    <div class="metric-content">
+                                        <div class="metric-value">99.8%</div>
+                                        <div class="metric-label">Uptime</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="metric-card agents-online">
+                                    <div class="metric-icon">🤖</div>
+                                    <div class="metric-content">
+                                        <div class="metric-value">5/5</div>
+                                        <div class="metric-label">Agents Online</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agent Network View -->
+                <div id="agent-networkView" class="view">
+                    <div class="view-header">
+                        <h2>🌐 Agent Network Topology</h2>
+                        <p>Interactive visualization of agent network and communication flows</p>
+                        <div class="agent-attribution-header">
+                            <span class="agent-badge-large">🌐 Network Topology</span>
+                            <span class="timestamp">Real-time agent interactions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-network-content" id="agent-network-content">
+                        <!-- Agent Network visualization will be rendered here by AgentNetworkVisualization.js -->
+                    </div>
+                </div>
+
+                <!-- Message Flow View -->
+                <div id="message-flowView" class="view">
+                    <div class="view-header">
+                        <h2>💬 Message Flow Visualization</h2>
+                        <p>Live stream of agent communications and message analytics</p>
+                    </div>
+                    
+                    <div class="message-flow-content" id="message-flow-content">
+                        <!-- Content for MessageFlowDisplay.js will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Live Monitoring Dashboard -->
+                <div id="live-monitoringView" class="view">
+                    <div class="view-header">
+                        <h2>📊 Live Monitoring Dashboard</h2>
+                        <p>Comprehensive real-time monitoring of all agent activities</p>
+                    </div>
+                    
+                    <div class="live-monitoring-content">
+                        <div class="monitoring-grid">
+                            <div class="monitoring-panel">
+                                <h4>Agent Network</h4>
+                                <div id="embedded-network" class="embedded-visualization"></div>
+                            </div>
+                            <div class="monitoring-panel">
+                                <h4>Message Flow</h4>
+                                <div id="embedded-flow" class="embedded-visualization"></div>
+                            </div>
+                            <div class="monitoring-panel">
+                                <h4>System Metrics</h4>
+                                <div id="system-metrics" class="metrics-display"></div>
+                            </div>
+                            <div class="monitoring-panel">
+                                <h4>Active Workflows</h4>
+                                <div id="active-workflows" class="workflows-display"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+            <div class="loading-content">
+                <div class="spinner-large"></div>
+                <h3>Processing Request</h3>
+                <p id="loadingMessage">Initializing agents...</p>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div id="modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Modal Title</h3>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Modal content will be populated dynamically -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="src/utils/api.js"></script>
+    <script src="src/utils/sapUtils.js"></script>
+    
+    <!-- AGENT-DRIVEN COMPONENTS - All connected to backend agents -->
+    <script src="src/components/ExecutiveDashboard.js?v=2025080201"></script>
+    <script src="src/components/SAPIntelligenceDashboard.js?v=2025080201"></script>
+    <script src="src/components/SAPChatInterface.js"></script>
+    <script src="src/components/TestCasesManager.js?v=2025080201"></script>
+    <script src="src/components/ScriptGenerator.js?v=2025080201"></script>
+    <script src="src/components/DependencyManager.js?v=2025080201"></script>
+    
+    <!-- DEPRECATED COMPONENTS - Keep for backward compatibility but they won't be used -->
+    <!-- <script src="src/components/ChatInterface.js"></script> -->
+    <!-- <script src="src/components/Dashboard.js"></script> -->
+    
+    <!-- Other stable components -->
+    <script src="src/components/DependencyGraph.js"></script>
+    <script src="src/components/TestCaseViewer.js"></script>
+    <script src="src/components/TestExecutionResults.js"></script>
+    <script src="src/components/AgentStatus.js"></script>
+    
+    <!-- Priority Enhancement Components -->
+    <script src="src/components/ScriptGenerator.js"></script>
+    <script src="src/components/PersonaSwitcher.js"></script>
+    <script src="src/components/AdvancedDependencyGraph.js"></script>
+    <script src="src/components/BusinessImpactDashboard.js"></script>
+    
+    <!-- Real-Time Monitoring Components -->
+            <script src="src/components/AgentNetworkVisualization.js?v=2025080205"></script>
+    <script src="src/components/MessageFlowDisplay.js"></script>
+    <script src="src/pages/App.js"></script>
+    
+    <!-- New component initialization script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== ASTC Frontend Initialization ===');
+            console.log('✅ New SAP components loading...');
+            console.log('🔧 Global functions status:');
+            console.log('  - window.sendMessage:', typeof window.sendMessage);
+            console.log('  - window.askQuestion:', typeof window.askQuestion);
+            console.log('  - window.sapIntelligenceDashboard:', typeof window.sapIntelligenceDashboard);
+            console.log('  - window.sapChatInterface:', typeof window.sapChatInterface);
+            
+            // No more manual initialization needed - new components auto-initialize
+            console.log('✅ All components are self-initializing');
+            console.log('🚫 OLD problematic components have been deprecated');
+            console.log('=== Initialization Complete ===');
+        });
+    </script>
+</body>
+</html> 

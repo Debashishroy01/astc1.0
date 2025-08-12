@@ -1,0 +1,131 @@
+{
+  "transactions": [
+    {
+      "code": "ME21N",
+      "name": "Create Purchase Order",
+      "module": "MM",
+      "description": "Create purchase order for procurement of materials and services",
+      "risk_level": "Medium",
+      "business_process": "Procurement",
+      "dependencies": ["Z_PO_APPROVAL", "VENDOR_MASTER", "MATERIAL_MASTER", "ME28"],
+      "test_templates": ["standard_po_creation", "approval_workflow", "po_change"],
+      "complexity": "Standard",
+      "frequency": "High",
+      "impact_areas": ["Procurement", "Finance", "Inventory"]
+    },
+    {
+      "code": "FB60",
+      "name": "Enter Incoming Invoice",
+      "module": "FI",
+      "description": "Enter vendor invoice for accounts payable processing",
+      "risk_level": "High",
+      "business_process": "Accounts Payable",
+      "dependencies": ["VENDOR_MASTER", "GL_ACCOUNTS", "ME21N", "MIRO"],
+      "test_templates": ["invoice_entry", "three_way_match", "tax_calculation"],
+      "complexity": "Complex",
+      "frequency": "High",
+      "impact_areas": ["Finance", "Procurement", "Tax"]
+    },
+    {
+      "code": "VA01",
+      "name": "Create Sales Order",
+      "module": "SD",
+      "description": "Create sales order for customer requirements",
+      "risk_level": "Medium",
+      "business_process": "Order to Cash",
+      "dependencies": ["CUSTOMER_MASTER", "MATERIAL_MASTER", "PRICING", "ATP_CHECK"],
+      "test_templates": ["standard_order", "pricing_calculation", "availability_check"],
+      "complexity": "Standard",
+      "frequency": "High",
+      "impact_areas": ["Sales", "Inventory", "Finance"]
+    },
+    {
+      "code": "MIGO",
+      "name": "Goods Movement",
+      "module": "MM",
+      "description": "Post goods receipt and goods issue transactions",
+      "risk_level": "High",
+      "business_process": "Inventory Management",
+      "dependencies": ["ME21N", "MATERIAL_MASTER", "STORAGE_LOCATION", "WM_INTEGRATION"],
+      "test_templates": ["goods_receipt", "goods_issue", "stock_transfer"],
+      "complexity": "Complex",
+      "frequency": "High",
+      "impact_areas": ["Inventory", "Procurement", "Finance"]
+    },
+    {
+      "code": "ME28",
+      "name": "Release Purchase Order",
+      "module": "MM",
+      "description": "Release purchase order for approval workflow",
+      "risk_level": "Low",
+      "business_process": "Procurement",
+      "dependencies": ["ME21N", "Z_PO_APPROVAL", "AUTHORIZATION"],
+      "test_templates": ["approval_release", "authorization_check"],
+      "complexity": "Simple",
+      "frequency": "Medium",
+      "impact_areas": ["Procurement"]
+    },
+    {
+      "code": "MIRO",
+      "name": "Invoice Receipt",
+      "module": "MM",
+      "description": "Enter invoice receipt for three-way matching",
+      "risk_level": "Medium",
+      "business_process": "Procurement",
+      "dependencies": ["ME21N", "MIGO", "VENDOR_MASTER", "FB60"],
+      "test_templates": ["invoice_receipt", "three_way_match", "tolerance_check"],
+      "complexity": "Standard",
+      "frequency": "Medium",
+      "impact_areas": ["Procurement", "Finance"]
+    },
+    {
+      "code": "VF01",
+      "name": "Create Billing Document",
+      "module": "SD",
+      "description": "Create billing document for sales order",
+      "risk_level": "Medium",
+      "business_process": "Order to Cash",
+      "dependencies": ["VA01", "VL01N", "PRICING", "TAX_CALCULATION"],
+      "test_templates": ["standard_billing", "tax_calculation", "pricing_validation"],
+      "complexity": "Standard",
+      "frequency": "High",
+      "impact_areas": ["Sales", "Finance", "Tax"]
+    },
+    {
+      "code": "VL01N",
+      "name": "Create Outbound Delivery",
+      "module": "SD",
+      "description": "Create delivery document for goods shipment",
+      "risk_level": "Low",
+      "business_process": "Order to Cash",
+      "dependencies": ["VA01", "MATERIAL_MASTER", "STORAGE_LOCATION"],
+      "test_templates": ["delivery_creation", "picking", "packing"],
+      "complexity": "Simple",
+      "frequency": "High",
+      "impact_areas": ["Sales", "Inventory"]
+    }
+  ],
+  "modules": {
+    "MM": {
+      "name": "Materials Management",
+      "description": "Procurement and inventory management processes"
+    },
+    "FI": {
+      "name": "Financial Accounting", 
+      "description": "Financial accounting and reporting processes"
+    },
+    "SD": {
+      "name": "Sales and Distribution",
+      "description": "Sales order processing and customer management"
+    },
+    "CO": {
+      "name": "Controlling",
+      "description": "Cost accounting and management reporting"
+    }
+  },
+  "risk_levels": {
+    "Low": "Minimal business impact, standard validations",
+    "Medium": "Moderate business impact, enhanced testing required",
+    "High": "High business impact, comprehensive testing mandatory"
+  }
+} 
